@@ -46,7 +46,7 @@ public abstract class SoundEffect extends DefaultEffect {
 	public SoundEffect(ConfigurationSection section) throws LoadingException {
 		super(section);
 		playerOnly();
-		sound = loader.loadEnum(SOUND, Sound.class);
+		sound = loader.loadSound(SOUND);
 		volume = (float) loader.loadPositiveDouble(VOLUME, 1.0);
 		pitch = (float) loader.loadPositiveDouble(PITCH, 1.0);
 	}
