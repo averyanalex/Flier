@@ -106,7 +106,6 @@ public class ProjectileGun extends DefaultAttack {
 				try{
 					projectile.setGravity(false);
 				} catch (NoSuchMethodError e) {}
-				projectile.setBounce(false);
 				if (projectile instanceof Explosive) {
 					Explosive explosive = (Explosive) projectile;
 					explosive.setIsIncendiary(false);
