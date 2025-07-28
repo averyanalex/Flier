@@ -82,7 +82,6 @@ public abstract class DefaultItem implements Item {
 		return name.startsWith("$") ? LangManager.getMessage(player, name.substring(1)) : name;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public ItemStack getItem(InGamePlayer player) {
 		String name = rawName.startsWith("$") ?
@@ -97,11 +96,7 @@ public abstract class DefaultItem implements Item {
 		ItemMeta meta = item.getItemMeta();
 		meta.setDisplayName(name);
 		meta.setLore(lore);
-		try {
-			meta.setUnbreakable(true);
-		} catch (NoSuchMethodError e) {
-			meta.spigot().setUnbreakable(true);
-		}
+		meta.setUnbreakable(true);
 		item.setItemMeta(meta);
 		return item;
 	}

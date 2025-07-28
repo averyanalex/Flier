@@ -181,13 +181,13 @@ public class Utils {
 		player.getInventory().clear();
 		player.setGameMode(GameMode.SURVIVAL);
 		try {
-			player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(
-					player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getDefaultValue());
+			player.getAttribute(Attribute.MAX_HEALTH).setBaseValue(
+					player.getAttribute(Attribute.MAX_HEALTH).getDefaultValue());
 		} catch (NoSuchMethodError e) {
 			player.resetMaxHealth();
 		}
 		try {
-			player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+			player.setHealth(player.getAttribute(Attribute.MAX_HEALTH).getValue());
 		} catch (NoSuchMethodError e) {
 			player.setHealth(player.getMaxHealth());
 		}

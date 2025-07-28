@@ -7,11 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     name: Build
     steps:
       - name: Checkout git repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Install required applications
         run: sudo apt-get install pandoc wkhtmltopdf -y --no-install-recommends
@@ -19,7 +19,7 @@ jobs:
       - name: Build
         run: ./make.sh
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         name: Upload Artifact
         with:
           name: Flier.7z

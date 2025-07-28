@@ -82,7 +82,7 @@ public class HealthAction extends DefaultAction {
 		if (amount > 0) {
 			double max;
 			try {
-				max = target.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+				max = target.getPlayer().getAttribute(Attribute.MAX_HEALTH).getValue();
 			} catch (NoSuchMethodError e) {
 				 max = target.getPlayer().getMaxHealth();
 			}

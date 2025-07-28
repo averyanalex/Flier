@@ -71,7 +71,7 @@ public class Bomb extends DefaultAttack {
 	@Override
 	public boolean act(InGamePlayer target, InGamePlayer source) {
 		TNTPrimed tnt = (TNTPrimed) target.getPlayer().getWorld().spawnEntity(
-				target.getPlayer().getLocation(), EntityType.PRIMED_TNT);
+				target.getPlayer().getLocation(), EntityType.TNT);
 		Attacker.saveAttacker(tnt, new DefaultAttacker(this, owner.get().getPlayer(), target, owner.get().getItem()));
 		tnt.setIsIncendiary(false);
 		tnt.setVelocity(target.getPlayer().getVelocity());
