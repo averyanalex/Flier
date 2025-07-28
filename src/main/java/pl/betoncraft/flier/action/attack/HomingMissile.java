@@ -28,6 +28,7 @@ import java.util.Optional;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
@@ -79,7 +80,7 @@ public class HomingMissile extends DefaultAttack {
 
 	public HomingMissile(ConfigurationSection section, Optional<Owner> owner) throws LoadingException {
 		super(section, owner);
-		entity = loader.loadEnum(ENTITY, EntityType.class);
+		entity = loader.loadFromRegistry(ENTITY, Registry.ENTITY_TYPE);
 		searchRange = loader.loadPositiveInt(SEARCH_RANGE);
 		searchRadius = loader.loadPositiveDouble(SEARCH_RADIUS);
 		speed = loader.loadPositiveDouble(SPEED);

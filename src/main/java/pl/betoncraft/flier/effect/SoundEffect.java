@@ -23,6 +23,7 @@
  */
 package pl.betoncraft.flier.effect;
 
+import org.bukkit.Registry;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -38,7 +39,7 @@ public abstract class SoundEffect extends DefaultEffect {
 	private static final String SOUND = "sound";
 	private static final String VOLUME = "volume";
 	private static final String PITCH = "pitch";
-	
+
 	protected Sound sound;
 	protected float volume;
 	protected float pitch;
@@ -46,7 +47,7 @@ public abstract class SoundEffect extends DefaultEffect {
 	public SoundEffect(ConfigurationSection section) throws LoadingException {
 		super(section);
 		playerOnly();
-		sound = loader.loadSound(SOUND);
+		sound = loader.loadFromRegistry(SOUND, Registry.SOUNDS);
 		volume = (float) loader.loadPositiveDouble(VOLUME, 1.0);
 		pitch = (float) loader.loadPositiveDouble(PITCH, 1.0);
 	}

@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -54,7 +55,7 @@ public class EntityBonus extends ProximityBonus implements Listener {
 	
 	public EntityBonus(ConfigurationSection section, Game game, Optional<Owner> owner) throws LoadingException {
 		super(section, game, owner);
-		type = loader.loadEnum("entity", EntityType.class);
+		type = loader.loadFromRegistry("entity", Registry.ENTITY_TYPE);
 	}
 
 	@EventHandler

@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -65,7 +66,7 @@ public abstract class DefaultItem implements Item {
 		loader = new ValueLoader(section);
 		modMan = new ModificationManager();
 		name = loader.loadString("name", id);
-		material = loader.loadEnum("material", Material.class);
+		material = loader.loadFromRegistry("material", Registry.MATERIAL);
 		rawName = loader.loadString("name");
 		rawLore = section.getStringList("lore");
 		weight = loader.loadDouble(WEIGHT, 0.0);

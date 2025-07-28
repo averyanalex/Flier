@@ -26,6 +26,7 @@ package pl.betoncraft.flier.activator;
 import java.util.Optional;
 
 import org.bukkit.Material;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 
 import pl.betoncraft.flier.api.core.InGamePlayer;
@@ -43,7 +44,7 @@ public class BlockStandingActivator extends DefaultActivator {
 
 	public BlockStandingActivator(ConfigurationSection section, Optional<Owner> owner) throws LoadingException {
 		super(section, owner);
-		block = loader.loadEnum("block", Material.class);
+		block = loader.loadFromRegistry("block", Registry.MATERIAL);
 		if (!block.isBlock() || !block.isSolid()) {
 			throw new LoadingException(String.format("Material '%s' is not a solid block.", block));
 		}

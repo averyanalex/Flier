@@ -28,6 +28,7 @@ import java.util.Random;
 
 import org.bukkit.Location;
 import org.bukkit.Particle;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 
 import pl.betoncraft.flier.api.core.InGamePlayer;
@@ -73,7 +74,7 @@ public class ParticleEffect extends DefaultEffect {
 		}
 		random = new Random();
 		playerOnly();
-		particle = loader.loadEnum(PARTICLE, Particle.class);
+		particle = loader.loadFromRegistry(PARTICLE, Registry.PARTICLE_TYPE);
 		amount = loader.loadNonNegativeInt(AMOUNT, 0);
 		double offset = loader.loadNonNegativeDouble(OFFSET, 0.0);
 		offsetX = loader.loadNonNegativeDouble(OFFSET_X, offset);

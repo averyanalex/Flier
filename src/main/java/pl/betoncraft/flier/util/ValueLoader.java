@@ -23,11 +23,12 @@
  */
 package pl.betoncraft.flier.util;
 
+import org.bukkit.Keyed;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 import org.bukkit.Registry;
-import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
+import org.jetbrains.annotations.NotNull;
 
 import pl.betoncraft.flier.api.core.LoadingException;
 
@@ -176,12 +177,11 @@ public class ValueLoader {
 	public Location loadLocation(String address) throws LoadingException {
 		return loadLocation(address, null);
 	}
-	
-	@SuppressWarnings("unchecked")
+
 	public <T extends Enum<T>> T loadEnum(String address, T def, Class<T> enumClass) throws LoadingException {
 		Object obj = get(address, def);
 		if (enumClass.isInstance(obj)) {
-			return (T) obj;
+			return enumClass.cast(obj);
 		} else if (obj instanceof String) {
 			try {
 				return Enum.valueOf(enumClass, ((String) obj).toUpperCase().replace(' ', '_'));
@@ -199,19 +199,26 @@ public class ValueLoader {
 		return loadEnum(address, null, enumClass);
 	}
 
-	public Sound loadSound(String address) throws LoadingException {
-		Object obj = get(address, null);
+	public <T extends Keyed> T loadFromRegistry(@NotNull String address, T def, Registry<T> registry)
+			throws LoadingException {
+		Object obj = get(address, def);
 		if (obj instanceof String) {
 			try {
-				return Registry.SOUNDS.getOrThrow(NamespacedKey.minecraft(((String) obj).toUpperCase().replace(' ', '_')));
+				NamespacedKey key = NamespacedKey.minecraft(((String) obj).toLowerCase().replace(' ', '_'));
+				return registry.getOrThrow(key);
 			} catch (IllegalArgumentException e) {
-				Exception detail = new LoadingException(String.format("%s '%s' does not exist.", Sound.class.getSimpleName(), ((String) obj)));
-				Exception error  = new LoadingException(String.format("'%s' must be a valid type.", address));
+				Exception detail = new LoadingException(
+						String.format("'%s' does not exist in registry.", ((String) obj)));
+				Exception error = new LoadingException(String.format("'%s' must be a valid type.", address));
 				throw (LoadingException) error.initCause(detail);
 			}
 		} else {
-			throw new LoadingException(String.format("'%s' must be a valid type.", address, Sound.class.getSimpleName()));
+			throw new LoadingException(String.format("'%s' must be a valid string.", address));
 		}
+	}
+
+	public <T extends Keyed> T loadFromRegistry(@NotNull String address, Registry<T> registry) throws LoadingException {
+		return loadFromRegistry(address, null, registry);
 	}
 
 }

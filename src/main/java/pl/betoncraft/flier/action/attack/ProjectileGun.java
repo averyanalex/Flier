@@ -30,6 +30,7 @@ import java.util.Optional;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Registry;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Explosive;
@@ -73,7 +74,7 @@ public class ProjectileGun extends DefaultAttack {
 	
 	public ProjectileGun(ConfigurationSection section, Optional<Owner> owner) throws LoadingException {
 		super(section, owner);
-		entity = loader.loadEnum(ENTITY, EntityType.class);
+		entity = loader.loadFromRegistry(ENTITY, Registry.ENTITY_TYPE);
 		burstAmount = loader.loadPositiveInt(BURST_AMOUNT);
 		burstTicks = loader.loadPositiveInt(BURST_TICKS);
 		projectileSpeed = loader.loadPositiveDouble(PROJECTILE_SPEED);
