@@ -16,11 +16,20 @@ jobs:
       - name: Install required applications
         run: sudo apt-get install pandoc wkhtmltopdf -y --no-install-recommends
 
-      - name: Build
-        run: ./make.sh
+      - name: Build jar
+        run: make jar
+
+      - name: Build docs
+        run: make docs
 
       - uses: actions/upload-artifact@v4
-        name: Upload Artifact
+        name: Upload Jar
         with:
-          name: Flier.7z
-          path: target/Flier.7z
+          name: flier-jar
+          path: target/Flier.jar
+
+      - uses: actions/upload-artifact@v4
+        name: Upload Documentation
+        with:
+          name: flier-docs
+          path: docs/Documentation.pdf
